@@ -7,18 +7,9 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-html, body {
-  height: 100%;
+html, body, #map {
+  height: 98%;
   margin: 0;
-  padding: 0;
-
-  /* wichtig gegen iframe-Subpixel-Scroll */
-  overflow: hidden;
-}
-
-#map {
-  position: fixed;
-  inset: 0;
 }
 </style>
 </head>
@@ -30,26 +21,17 @@ html, body {
 <script>
 const lat = 53.5074891785411;
 const lng = 9.987653195858002;
+const zoom = 18;
 
-const map = L.map('map', {
-  zoomControl: true
-}).setView([lat, lng], 18);
+const map = L.map('map').setView([lat, lng], zoom);
 
+// stabile Standard-Tiles (keine Styles, keine GL, keine Dependencies)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
 L.marker([lat, lng]).addTo(map);
-
-/* entscheidend: mehrfaches Resize gegen iframe rounding */
-function fix() {
-  map.invalidateSize(true);
-}
- 
-setTimeout(fix, 100);
-setTimeout(fix, 500);
-setTimeout(fix, 1000);
 </script>
 
 </body>
