@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>OSM Karte</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Verdana, sans-serif;
-      text-align: left;
-    }
-    iframe {
-      border: 1px solid black;
-    }
-    small a {
-      color: #727374;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="utf-8">
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+
+<style>
+html, body, #map {
+  height: 100%;
+  margin: 0;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+</style>
 </head>
+
 <body>
-  <iframe
-    width="425"
-    height="350"
-    src="https://www.openstreetmap.org/export/embed.html?bbox=9.98674124479294%2C53.506958785453534%2C9.988565146923067%2C53.50801956499158&amp;layer=mapnik&amp;marker=53.5074891785411%2C9.987653195858002"
-    style="border:1px solid black; float: left;">
-  </iframe>
-  <br>
-  <small>
-    <a href="https://www.openstreetmap.org/?mlat=53.507489&amp;mlon=9.987653#map=19/53.507489/9.987653">Größere Karte anzeigen</a>
-  </small>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+const map = L.map('map', {
+  zoomControl: true
+}).setView([53.5511, 9.9937], 12);
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '© OpenStreetMap'
+  }
+).addTo(map);
+
+L.marker([53.5511, 9.9937]).addTo(map);
+</script>
 </body>
 </html>
