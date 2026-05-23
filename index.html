@@ -11,16 +11,14 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+
+  /* wichtig gegen iframe-Subpixel-Scroll */
   overflow: hidden;
 }
 
-/* entscheidend: absolute statt normalem Flow */
 #map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: fixed;
+  inset: 0;
 }
 </style>
 </head>
@@ -33,7 +31,9 @@ html, body {
 const lat = 53.5074891785411;
 const lng = 9.987653195858002;
 
-const map = L.map('map').setView([lat, lng], 18);
+const map = L.map('map', {
+  zoomControl: true
+}).setView([lat, lng], 18);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
@@ -42,9 +42,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 L.marker([lat, lng]).addTo(map);
 
-setTimeout(() => {
-  map.invalidateSize();
-}, 200);
+/* entscheidend: mehrfaches Resize gegen iframe rounding */
+function fix() {
+  map.invalidateSize(true);
+}
+
+setTimeout(fix, 100);
+setTimeout(fix, 500);
+setTimeout(fix, 1000);
 </script>
 
 </body>
