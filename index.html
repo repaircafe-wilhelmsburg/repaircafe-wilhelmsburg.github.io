@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
 
 <link
   rel="stylesheet"
@@ -28,13 +28,15 @@ const map = L.map('map').setView(
 );
 
 L.tileLayer(
-  'https://tiles.openfreemap.org/styles/liberty/{z}/{x}/{y}.png',
+  'https://tiles.openfreemap.org/{z}/{x}/{y}.png',
   {
+    maxZoom: 20,
     attribution: '&copy; OpenFreeMap & OpenStreetMap contributors'
   }
 ).addTo(map);
 
 L.marker([53.5074891785411, 9.987653195858002]).addTo(map);
 </script>
+
 </body>
 </html>
