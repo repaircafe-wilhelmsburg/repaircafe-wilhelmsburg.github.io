@@ -7,9 +7,15 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-html, body, #map {
+html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
 }
 </style>
 </head>
@@ -25,13 +31,17 @@ const zoom = 18;
 
 const map = L.map('map').setView([lat, lng], zoom);
 
-// stabile Standard-Tiles (keine Styles, keine GL, keine Dependencies)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
 L.marker([lat, lng]).addTo(map);
+
+// wichtig für iframe / Google Sites
+setTimeout(() => {
+  map.invalidateSize();
+}, 200);
 </script>
 
 </body>
