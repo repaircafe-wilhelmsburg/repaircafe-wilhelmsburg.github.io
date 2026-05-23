@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 
 <link
   rel="stylesheet"
@@ -13,10 +13,6 @@ html, body, #map {
   height: 100%;
   margin: 0;
 }
-
-.leaflet-control-attribution {
-  font-size: 10px;
-}
 </style>
 </head>
 
@@ -26,18 +22,19 @@ html, body, #map {
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-const map = L.map('map', {
-  zoomControl: true
-}).setView([53.5511, 9.9937], 12);
+const map = L.map('map').setView(
+  [53.5074891785411, 9.987653195858002],
+  18
+);
 
 L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://tiles.openfreemap.org/styles/liberty/{z}/{x}/{y}.png',
   {
-    attribution: '© OpenStreetMap'
+    attribution: '&copy; OpenFreeMap & OpenStreetMap contributors'
   }
 ).addTo(map);
 
-L.marker([53.5511, 9.9937]).addTo(map);
+L.marker([53.5074891785411, 9.987653195858002]).addTo(map);
 </script>
 </body>
 </html>
